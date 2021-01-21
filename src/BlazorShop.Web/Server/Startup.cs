@@ -10,6 +10,7 @@ namespace BlazorShop.Web.Server
 
     using Infrastructure.Extensions;
     using Middleware;
+    using BlazorShop.Data;
 
     public class Startup
     {

@@ -10,33 +10,33 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorShop.Data.Migrations
 {
     [DbContext(typeof(BlazorShopDbContext))]
-    [Migration("20201003195208_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210120184522_mymigration")]
+    partial class mymigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("BlazorShop.Data.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Country")
                         .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -46,8 +46,8 @@ namespace BlazorShop.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -57,18 +57,18 @@ namespace BlazorShop.Data.Migrations
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -105,18 +105,18 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -141,24 +141,24 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -170,12 +170,12 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -193,19 +193,19 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -216,7 +216,7 @@ namespace BlazorShop.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -232,8 +232,8 @@ namespace BlazorShop.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -298,7 +298,7 @@ namespace BlazorShop.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -310,13 +310,13 @@ namespace BlazorShop.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(1000)")
-                        .HasMaxLength(1000);
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("ImageSource")
                         .IsRequired()
-                        .HasColumnType("nvarchar(2048)")
-                        .HasMaxLength(2048);
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -326,8 +326,8 @@ namespace BlazorShop.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -349,7 +349,7 @@ namespace BlazorShop.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -397,7 +397,7 @@ namespace BlazorShop.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -442,7 +442,7 @@ namespace BlazorShop.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -466,7 +466,7 @@ namespace BlazorShop.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -548,6 +548,8 @@ namespace BlazorShop.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BlazorShop.Data.Models.Order", b =>
@@ -563,6 +565,10 @@ namespace BlazorShop.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("DeliveryAddress");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BlazorShop.Data.Models.OrderProduct", b =>
@@ -578,6 +584,10 @@ namespace BlazorShop.Data.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("BlazorShop.Data.Models.Product", b =>
@@ -587,6 +597,8 @@ namespace BlazorShop.Data.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("BlazorShop.Data.Models.ShoppingCart", b =>
@@ -596,6 +608,8 @@ namespace BlazorShop.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BlazorShop.Data.Models.ShoppingCartProduct", b =>
@@ -611,6 +625,10 @@ namespace BlazorShop.Data.Migrations
                         .HasForeignKey("ShoppingCartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("ShoppingCart");
                 });
 
             modelBuilder.Entity("BlazorShop.Data.Models.Wishlist", b =>
@@ -620,6 +638,8 @@ namespace BlazorShop.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BlazorShop.Data.Models.WishlistProduct", b =>
@@ -635,6 +655,10 @@ namespace BlazorShop.Data.Migrations
                         .HasForeignKey("WishlistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Wishlist");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -686,6 +710,51 @@ namespace BlazorShop.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BlazorShop.Data.Models.Address", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("BlazorShop.Data.Models.BlazorShopUser", b =>
+                {
+                    b.Navigation("Addresses");
+
+                    b.Navigation("Orders");
+
+                    b.Navigation("ShoppingCarts");
+
+                    b.Navigation("Wishlists");
+                });
+
+            modelBuilder.Entity("BlazorShop.Data.Models.Category", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BlazorShop.Data.Models.Order", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BlazorShop.Data.Models.Product", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("ShoppingCarts");
+
+                    b.Navigation("Wishlists");
+                });
+
+            modelBuilder.Entity("BlazorShop.Data.Models.ShoppingCart", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BlazorShop.Data.Models.Wishlist", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
